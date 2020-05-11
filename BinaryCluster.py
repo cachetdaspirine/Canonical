@@ -1,4 +1,5 @@
 import numpy as np
+import sys
 import copy
 
 class BinaryCluster:
@@ -40,7 +41,7 @@ class BinaryCluster:
     def BuildArray(self):
         self.ComputeCenter()
         #Build a square window of size NP*NP to be sure that the aggregate
-        # fit in it. It is only 0 for now
+        # fit in it. It is full of 0 for now
         self.WindowArray=np.array([np.zeros(self.Size,dtype=int)
                             for _ in range(self.Size)])
         MidX,MidY=self.Size//2, self.Size//2#middle of my aggregate
@@ -52,7 +53,15 @@ class BinaryCluster:
         for ij in self.RealSpaceSites:
             self.WindowSpaceSites.add((ij[0]-self.Xg+MidX,ij[1]-self.Yg+MidY))
         for ij in self.WindowSpaceSites:
-            self.WindowArray[ij[0],ij[1]]=1
+            try:
+                self.WindowArray[ij[0],ij[1]]=1
+            except IndexError:
+                print(self.RealSpaceSites)
+                print()
+                print(ij)
+                print(self.WindowArray)
+                sys.exit()
+
     # Given a list of indices in the real space domaine of occupied SitesIndices
     # this function compute the center of mass of the object in order to rebuild
     # the aggregate in a smaller window
