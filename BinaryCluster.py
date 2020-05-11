@@ -13,7 +13,14 @@ class BinaryCluster:
         #self.Size=max([self.RealSpaceSites.__len__()+2,5])
         self.Size=self.GetMaximumExtension()+2
         # Build an array of 0/1 in a box where there are only the one we gave as Sites
-        self.BuildArray()
+        Building=false
+        while not Building:
+            try :
+                self.BuildArray()
+            except IndexError :
+                self.Size+=1
+            else:
+                Building=True
         self.ComputeBoundarySites()
     #------------------------------------------------------------------
     # The following function would eventually be usefull  for periodic
@@ -56,11 +63,7 @@ class BinaryCluster:
             try:
                 self.WindowArray[ij[0],ij[1]]=1
             except IndexError:
-                print(self.RealSpaceSites)
-                print()
-                print(ij)
-                print(self.WindowArray)
-                sys.exit()
+                raise
 
     # Given a list of indices in the real space domaine of occupied SitesIndices
     # this function compute the center of mass of the object in order to rebuild
