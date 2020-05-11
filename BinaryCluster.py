@@ -13,7 +13,7 @@ class BinaryCluster:
         #self.Size=max([self.RealSpaceSites.__len__()+2,5])
         self.Size=self.GetMaximumExtension()+2
         # Build an array of 0/1 in a box where there are only the one we gave as Sites
-        Building=false
+        Building=F:False
         while not Building:
             try :
                 self.BuildArray()
