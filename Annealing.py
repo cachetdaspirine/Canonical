@@ -1,16 +1,17 @@
-#!/home/hugo/anaconda3/bin/python3
 #!/usr/bin/python3
+#!/home/hugo/anaconda3/bin/python3
+
 from System import *
 from McMove import *
 import time
 import os
 
 time_start = time.perf_counter()
-SimNum=1
+SimNum=3
 os.system('rm -rf Res/Sim'+str(SimNum))
 os.system('mkdir Res/Sim'+str(SimNum))
 
-Output=True
+Output=False
 with open('Res/Sim'+str(SimNum)+'/Energy.out','w') as myfile:
     myfile.write('time ElasticEnergy SurfaceEnergy TotalEnergy \n')
 #  ____                                              _
@@ -19,9 +20,9 @@ with open('Res/Sim'+str(SimNum)+'/Energy.out','w') as myfile:
 # |  __/  | (_| | | |    | (_| | | | | | | | |  __/ | |_  |  __/ | |    \__ \
 # |_|      \__,_| |_|     \__,_| |_| |_| |_|  \___|  \__|  \___| |_|    |___/
 
-TimeStepTot=1000
-StatTime=TimeStepTot//10
-BetaInitial=10
+TimeStepTot=200000
+StatTime=TimeStepTot//100
+BetaInitial=0
 BetaFinal=1.6*10**2
 Seed=98987
 DEG=0.0125
@@ -43,13 +44,13 @@ def CoolDown(time,DE0):
 Kmain=1.
 Kcoupling=1.
 Eps=0.1
-KVOL=8.
+KVOL=10.
 #----------------
-J=0.05#0.135
+J=1.#0.135
 #----------------
-SizeX=10
-SizeY=10
-NumberOfParticle=50
+SizeX=25
+SizeY=25
+NumberOfParticle=100
 
 
 #   ___    _   _   _____   ____    _   _   _____
