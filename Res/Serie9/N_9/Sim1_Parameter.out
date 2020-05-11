@@ -1,0 +1,11 @@
+TimeStepTot 2000
+StatTime 100
+BetaInitial 0
+Kmain 1.0
+Kcoupling 1.0
+Eps 0.1
+KVOL 10.0
+J 1.0
+SizeX 28
+SizeY 28
+NumberOfParticles 9
