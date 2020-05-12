@@ -244,8 +244,15 @@ class Cluster:
         if not ax and not ToPrint:
             fig,ax=plt.subplots(figsize=figuresize)
             Lim=True
+        Printed=False
         self.PrintPerSite('ToPlot.txt')
-        Data=np.loadtxt('ToPlot.txt',dtype=float)
+        while not Printed:
+            try:
+                Data=np.loadtxt('ToPlot.txt',dtype=float)
+            except FileNotFoundError:
+                self.PrintPerSite('ToPlot.txt')
+            else:
+                Printed = True
         os.system('rm -rf ToPlot.txt')
         XC,YC=0,0
         if type(Data[0])!=np.ndarray:
