@@ -9,6 +9,5 @@ cd /home/hleroy/MC_Python
 #cd $PBS_O_WORKDIR
 
 #on lance le calcul
-git checkout Canonical
 ./Annealing.py
 

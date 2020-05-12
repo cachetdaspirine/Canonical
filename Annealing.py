@@ -7,7 +7,7 @@ import time
 import os
 
 time_start = time.perf_counter()
-SimNum=3
+SimNum=0
 os.system('rm -rf Res/Sim'+str(SimNum))
 os.system('mkdir Res/Sim'+str(SimNum))
 
@@ -46,7 +46,7 @@ Kcoupling=1.
 Eps=0.1
 KVOL=10.
 #----------------
-J=1.#0.135
+J=0.15#0.135
 #----------------
 SizeX=25
 SizeY=25
