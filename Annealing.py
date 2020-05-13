@@ -126,6 +126,6 @@ for t in range(1,TimeStepTot):
 #Syst.PlotPerSite()
 Syst.PrintPerSite('Res/Sim'+str(SimNum)+'/Site_Final.res')
 #Syst.PrintPerSpring('Res/Sim'+str(SimNum)+'/Spring_Final.res')
-Syst.PlotPerSite()
+#Syst.PlotPerSite()
 
 print(time.perf_counter() - time_start)
