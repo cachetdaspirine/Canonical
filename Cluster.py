@@ -230,7 +230,7 @@ class Cluster:
             print("can t output an empty system")
             return 0.
         lib.OutputSystemSpring(self.Adress,Name.encode('utf-8'))
-    def PlotPerSite(self,figuresize=(7,5),zoom=1.,show=True,ax=None,ToPrint=False):
+    def PlotPerSite(self,figuresize=(7,5),zoom=1.,show=True,ax=None,ToPrint=False,Path=''):
         # this one has a trick, it only 'works' on UNIX system and
         # it requires to be autorized to edit and delete file. The
         # idea is to use the function  in  order  to  PrintPersite
@@ -245,15 +245,15 @@ class Cluster:
             fig,ax=plt.subplots(figsize=figuresize)
             Lim=True
         Printed=False
-        self.PrintPerSite('ToPlot.txt')
+        self.PrintPerSite(Path+'ToPlot.txt')
         while not Printed:
             try:
-                Data=np.loadtxt('ToPlot.txt',dtype=float)
+                Data=np.loadtxt(Path+'ToPlot.txt',dtype=float)
             except FileNotFoundError:
-                self.PrintPerSite('ToPlot.txt')
+                self.PrintPerSite(Path+'ToPlot.txt')
             else:
                 Printed = True
-        os.system('rm -rf ToPlot.txt')
+        os.system('rm -rf '+Path+'ToPlot.txt')
         XC,YC=0,0
         if type(Data[0])!=np.ndarray:
             Data=np.array([Data])

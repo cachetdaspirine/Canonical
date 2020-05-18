@@ -310,8 +310,8 @@ class System:
         ax.set_xlim([0,self.Lx+3])
         ax.set_ylim([0,self.Ly+3])
         plt.show()
-    def PrintPerSite(self,FileName='Noname.txt'):
+    def PrintPerSite(self,FileName='Noname.txt',Path=''):
         XY=[]
         for objcluster in self.ObjectClusters:
-            XY.extend(objcluster.PlotPerSite(show=False,ToPrint=True))
+            XY.extend(objcluster.PlotPerSite(show=False,ToPrint=True,Path=Path))
         np.savetxt(FileName,XY)
