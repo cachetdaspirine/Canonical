@@ -5,27 +5,24 @@ from System import *
 from McMove import *
 import time
 import os
+import sys
+
+if len(sys.argv)<2:
+    print('Number of the serie not specified, please enter a serie name')
+    sys.exit()
 
 time_start = time.perf_counter()
-SimNum=0
-os.system('rm -rf Res/Sim'+str(SimNum))
-os.system('mkdir Res/Sim'+str(SimNum))
+SimNum=sys.argv[1]
+sys.path.insert(0,'Res/Serie'+str(SerieNum))
+from Parameter import *
+#os.system('rm -rf Res/Sim'+str(SimNum))
+#os.system('mkdir Res/Sim'+str(SimNum))
 
 Output=False
 with open('Res/Sim'+str(SimNum)+'/Energy.out','w') as myfile:
     myfile.write('time ElasticEnergy SurfaceEnergy TotalEnergy \n')
-#  ____                                              _
-# |  _ \    __ _   _ __    __ _   _ __ ___     ___  | |_    ___   _ __   ___
-# | |_) |  / _` | | '__|  / _` | | '_ ` _ \   / _ \ | __|  / _ \ | '__| / __|
-# |  __/  | (_| | | |    | (_| | | | | | | | |  __/ | |_  |  __/ | |    \__ \
-# |_|      \__,_| |_|     \__,_| |_| |_| |_|  \___|  \__|  \___| |_|    |___/
 
-TimeStepTot=200000
-StatTime=TimeStepTot//100
-BetaInitial=0
-BetaFinal=1.6*10**2
-Seed=98987
-DEG=0.0125
+
 
 def CoolDown(time,DE0):
     #print(DE0)
@@ -34,23 +31,7 @@ def CoolDown(time,DE0):
     else :
         return BetaInitial
     #return BetaInitial+time/TimeStepTot*(BetaFinal-BetaInitial)
-#  ____                  _
-# / ___|   _   _   ___  | |_    ___   _ __ ___
-# \___ \  | | | | / __| | __|  / _ \ | '_ ` _ \
-#  ___) | | |_| | \__ \ | |_  |  __/ | | | | | |
-# |____/   \__, | |___/  \__|  \___| |_| |_| |_|
-#          |___/
 
-Kmain=1.
-Kcoupling=1.
-Eps=0.1
-KVOL=10.
-#----------------
-J=0.15#0.135
-#----------------
-SizeX=25
-SizeY=25
-NumberOfParticle=100
 
 
 #   ___    _   _   _____   ____    _   _   _____
