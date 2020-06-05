@@ -12,7 +12,7 @@ if len(sys.argv)<2:
     sys.exit()
 
 time_start = time.perf_counter()
-SimNum=sys.argv[1]
+SerieNum=sys.argv[1]
 sys.path.insert(0,'Res/Serie'+str(SerieNum))
 from Parameter import *
 #os.system('rm -rf Res/Sim'+str(SimNum))
