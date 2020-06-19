@@ -6,15 +6,15 @@
 #          |___/
 
 Kmain=1.
-Kcoupling=1.
-Eps=0.1
-KVOL=10.
+Kcoupling=21
+Eps=0.01
+KVOL=0.
 #----------------
-J=0.15#0.135
+J=0.0003
 #----------------
-SizeX=25
-SizeY=25
-NumberOfParticle=100
+SizeX=35
+SizeY=35
+NumberOfParticle=150
 
 #  ____                                              _
 # |  _ \    __ _   _ __    __ _   _ __ ___     ___  | |_    ___   _ __   ___
@@ -22,9 +22,9 @@ NumberOfParticle=100
 # |  __/  | (_| | | |    | (_| | | | | | | | |  __/ | |_  |  __/ | |    \__ \
 # |_|      \__,_| |_|     \__,_| |_| |_| |_|  \___|  \__|  \___| |_|    |___/
 
-TimeStepTot=200000
+TimeStepTot=1000000
 StatTime=TimeStepTot//100
 BetaInitial=0
 BetaFinal=1.6*10**2
-Seed=98987
+Seed=None
 DEG=0.0125

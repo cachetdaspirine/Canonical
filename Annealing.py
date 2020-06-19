@@ -13,7 +13,7 @@ if len(sys.argv)<2:
 
 time_start = time.perf_counter()
 SimNum=sys.argv[1]
-sys.path.insert(0,'Res/Serie'+str(SimNum))
+sys.path.insert(0,'Res/Sim'+str(SimNum))
 from Parameter import *
 #os.system('rm -rf Res/Sim'+str(SimNum))
 #os.system('mkdir Res/Sim'+str(SimNum))
