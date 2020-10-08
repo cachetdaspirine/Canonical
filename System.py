@@ -260,7 +260,7 @@ class System:
                                     Yg=self.BinaryClusters[-1].Yg))
         return RandomSite
     def RemoveRandParticle(self):
-        # Try to add a particle
+        # Try to remove a particle
         try :
             RandomParticle=rd.sample(self.OccupiedSite,1)[0]
         except ValueError:

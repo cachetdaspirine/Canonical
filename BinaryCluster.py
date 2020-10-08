@@ -76,12 +76,15 @@ class BinaryCluster:
         self.Xg=int(self.Xg/len(self.RealSpaceSites)+1)
         self.Yg=int(self.Yg/len(self.RealSpaceSites)+1)
     def ComputeBoundarySites(self):
-        BoundarySites=set()
+        #BoundarySites=set()
         self.BuildOccupiedSites()
+        self.NBoundary=0
         for ij in self.OccupiedSite:
-            for neigh in self.Get_Neighbors(ij,Free=True):
-                BoundarySites.add(neigh)
-        self.NBoundary=BoundarySites.__len__()
+            Neighs = self.Get_Neighbors(ij,Free=True)
+            self.NBoundary+=Neighs.__len__()
+            #for neigh in Neighs:
+            #    BoundarySites.add(neigh)
+        #self.NBoundary=BoundarySites.__len__()
     def Get_Neighbors(self, ij,Occupied=False,Free=False):
         Res=list()
         if ij[0]+1<self.Size:
