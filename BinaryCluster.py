@@ -3,6 +3,8 @@ import sys
 import copy
 
 class BinaryCluster:
+    TopologieUp=list()
+    TopologieDown=list()
     def __init__(self,Sites,Lx,Ly):
         # Keep track of where the sites are located in the real system
         # RealSpaceSites is a list of tuple (i,j) which represent the
@@ -80,42 +82,41 @@ class BinaryCluster:
         self.BuildOccupiedSites()
         self.NBoundary=0
         for ij in self.OccupiedSite:
-            Neighs = self.Get_Neighbors(ij,Free=True)
+            Neighs = self.Get_Neighbors(ij,Border=True)
             self.NBoundary+=Neighs.__len__()
             #for neigh in Neighs:
             #    BoundarySites.add(neigh)
         #self.NBoundary=BoundarySites.__len__()
-    def Get_Neighbors(self, ij,Occupied=False,Free=False):
-        Res=list()
-        if ij[0]+1<self.Size:
-            Res.append((ij[0]+1,ij[1]))
-        elif Free:
-            Res.append((np.infty,ij[1]))
-        if ij[0]-1>=0:
-            Res.append((ij[0]-1,ij[1]))
-        elif Free:
-            Res.append((np.infty,ij[1]))
-        if(ij[0]+ij[1])%2==0:
-            if ij[1]+1<self.Size:
-                Res.append((ij[0],ij[1]+1))
-            elif Free:
-                Res.append((ij[0],np.infty))
+    def Get_Neighbors(self, ij,Occupied=False,Free=False,Border=False):
+        if (ij[0]+ij[1])%2==0:
+            Res = np.array(self.TopologieDown)+np.array(ij)
         else :
-            if ij[1]>=0:
-                Res.append((ij[0],ij[1]-1))
-            elif Free :
-                Res.append((ij[0],np.infty))
-        if Occupied:
-            for n in reversed(range(Res.__len__())):
-                if self.WindowArray[Res[n]]!=1:
-                    del Res[n]
-        if Free:
-            for n in reversed(range(Res.__len__())):
-                if all(res!=np.infty for res in Res[n]):
-                    if self.WindowArray[Res[n]]!=0:
-                        del Res[n]
-        Res=set(Res)
-        return Res
+            Res = np.array(self.TopologieUp)+np.array(ij)
+        # regularize the result array with only the value that can be inside the state
+        if not Border:
+            Resreg=np.delete(Res,np.argwhere((Res[:,0]>=self.Size) | (Res[:,0]<0) | (Res[:,1]>=self.Size) | (Res[:,1]<0)),0)
+        else:
+            Resreg=Res
+        #Build a numpy array of tuple
+        Resbis=np.empty(Resreg.__len__(),dtype=object)
+        Resbis[:] = list(zip(Resreg[:,0],Resreg[:,1]))
+        if Border:
+            Resbis = list(Resbis)
+        #check the occupancie or not
+        if Border :
+            for n in reversed(range(Resbis.__len__())):
+                try:
+                    if self.WindowArray[Resbis[n]]!=0:
+                        del Resbis[n]
+                except IndexError:
+                    continue
+        else :
+            if Occupied:
+                Resbis=Resbis[np.array([self.WindowArray[r]==1 for r in Resbis ])]
+            elif Free:
+                Resbis = Resbis[np.array([self.WindowArray[r]==0 for r in Resbis])]
+
+        return set(Resbis)
     def BuildOccupiedSites(self):
         self.OccupiedSite=set()
         for i,line in enumerate(self.WindowArray):

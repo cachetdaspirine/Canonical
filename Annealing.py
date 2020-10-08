@@ -17,7 +17,10 @@ sys.path.insert(0,'Res/Sim'+str(SimNum))
 from Parameter import *
 #os.system('rm -rf Res/Sim'+str(SimNum))
 #os.system('mkdir Res/Sim'+str(SimNum))
-
+System.TopologieUp = TopologieUp
+System.TopologieDown = TopologieDown
+BinaryCluster.TopologieDown = TopologieDown
+BinaryCluster.TopologieUp = TopologieUp
 Output=False
 with open('Res/Sim'+str(SimNum)+'/Energy.out','w') as myfile:
     myfile.write('time ElasticEnergy SurfaceEnergy TotalEnergy \n')
