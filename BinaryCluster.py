@@ -2,10 +2,19 @@ import numpy as np
 import sys
 import copy
 
+TopologieDownHex = [(1,0),(0,1),(-1,1),(-1,0),(0,-1),(1,-1)]
+TopologieUpHex = [(1,0),(0,1),(-1,1),(-1,0),(0,-1),(1,-1)]
+TopologieDownTriangle = [(1,0),(-1,0),(0,1)]
+TopologieUpTriangle = [(1,0),(-1,0),(0,-1)]
+
 class BinaryCluster:
-    TopologieUp=list()
-    TopologieDown=list()
-    def __init__(self,Sites,Lx,Ly):
+    def __init__(self,Sites,Lx,Ly,ParticleType='Triangle'):
+        if ParticleType == 'Triangle':
+            self.TopologieUp = TopologieUpTriangle
+            self.TopologieDown = TopologieDownTriangle
+        elif ParticleType=='Hexagon':
+            self.TopologieUp = TopologieUpHex
+            self.TopologieDown = TopologieDownHex
         # Keep track of where the sites are located in the real system
         # RealSpaceSites is a list of tuple (i,j) which represent the
         # location of each particle
@@ -105,11 +114,9 @@ class BinaryCluster:
         #check the occupancie or not
         if Border :
             for n in reversed(range(Resbis.__len__())):
-                try:
+                if Resbis[n][0]>=0 and Resbis[n][1]>=0 and Resbis[n][0]<self.Size and Resbis[n][1]<self.Size:
                     if self.WindowArray[Resbis[n]]!=0:
                         del Resbis[n]
-                except IndexError:
-                    continue
         else :
             if Occupied:
                 Resbis=Resbis[np.array([self.WindowArray[r]==1 for r in Resbis ])]

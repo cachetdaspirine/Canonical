@@ -34,9 +34,11 @@ cm = LinearSegmentedColormap('my_colormap', cdict, 1024)
 # -Addrandparticle : Random 0->1
 #------------------------------------------------------------------------------------
 #------------------------------------------------------------------------------------
+TopologieDownHex = [(1,0),(0,1),(-1,1),(-1,0),(0,-1),(1,-1)]
+TopologieUpHex = [(1,0),(0,1),(-1,1),(-1,0),(0,-1),(1,-1)]
+TopologieDownTriangle = [(1,0),(-1,0),(0,1)]
+TopologieUpTriangle = [(1,0),(-1,0),(0,-1)]
 class System:
-    TopologieUp=list()
-    TopologieDown=list()
     #There are three ways of initializing the System
     # 1- with another system -> make a Copy
     # 2- with an array of 0 and 1 -> create the cluster associated
@@ -54,8 +56,10 @@ class System:
                 Kvol=1.,
                 J=1.,
                 Old_System=None,
-                State=None):
+                State=None,
+                ParticleType='Triangle'):
         # Elastic constant
+        self.ParticleType = ParticleType
         self.J=J
         self.Eps=Eps
         self.Kmain=Kmain
@@ -67,6 +71,12 @@ class System:
         self.FreeSite=set()
         # Two ways of initializing the system
         if type(State)==np.ndarray:
+            if ParticleType == 'Triangle':
+                self.TopologieUp = TopologieUpTriangle
+                self.TopologieDown = TopologieDownTriangle
+            elif ParticleType == 'Hexagon':
+                self.TopologieUp = TopologieUpHex
+                self.TopologieDown = TopologieDownHex
             self.Build_From_Array(State) # From an array
             self.Compute_Energy()
         elif Old_System!=None:
@@ -82,6 +92,9 @@ class System:
             self.Compute_Energy()
     def Build_From_System(self,Old):
         #From another System : we copy everything
+        self.ParticleType = Old.ParticleType
+        self.TopologieUp = Old.TopologieUp
+        self.TopologieDown = Old.TopologieDown
         self.Lx,self.Ly=Old.Lx,Old.Ly
         self.State=copy.copy(Old.State)
         self.Kmain,self.Kvol,self.Eps,self.Kcoupling=Old.Kmain,Old.Kvol,Old.Eps,Old.Kcoupling
@@ -155,7 +168,8 @@ class System:
                                         Kcoupling=self.Kcoupling,
                                         Kvol=self.Kvol,
                                         Xg=BinClust.Xg,
-                                        Yg=BinClust.Yg))
+                                        Yg=BinClust.Yg,
+                                        ParticleType=self.ParticleType))
     def MakeBinaryClusters(self,SitesNoCluster):
         # Given an array of 0/1 called self.State this function split all the
         # 1 that respect a neighboring relation (given by the function Neighbors)
@@ -171,7 +185,7 @@ class System:
                 ToIterate=ToAdd.difference(Cluster) # Remove the one that were already in the cluster
                 Cluster.update(ToAdd) # Add them in the cluster
                 ToAdd=set() # reset the adding list
-            self.BinaryClusters.append(BinaryCluster(Cluster,self.Lx,self.Ly))
+            self.BinaryClusters.append(BinaryCluster(Cluster,self.Lx,self.Ly,ParticleType=self.ParticleType))
             # Remove the particles that are in the newly created cluster
             SitesNoCluster=SitesNoCluster.difference(Cluster)
     def Get_Neighbors(self, ij,Occupied=False):#,Free=False):

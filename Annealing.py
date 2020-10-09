@@ -17,10 +17,6 @@ sys.path.insert(0,'Res/Sim'+str(SimNum))
 from Parameter import *
 #os.system('rm -rf Res/Sim'+str(SimNum))
 #os.system('mkdir Res/Sim'+str(SimNum))
-System.TopologieUp = TopologieUp
-System.TopologieDown = TopologieDown
-BinaryCluster.TopologieDown = TopologieDown
-BinaryCluster.TopologieUp = TopologieUp
 Output=False
 with open('Res/Sim'+str(SimNum)+'/Energy.out','w') as myfile:
     myfile.write('time ElasticEnergy SurfaceEnergy TotalEnergy \n')
@@ -67,7 +63,7 @@ with open('Res/Sim'+str(SimNum)+'/Parameter.out','w') as myfile:
 rd.seed(Seed)
 np.random.seed(Seed)
 Beta=BetaInitial
-Syst=System(SizeX,SizeY,J=J,Eps=Eps,Kcoupling=Kcoupling,Kmain=Kmain,Kvol=KVOL)
+Syst=System(SizeX,SizeY,J=J,Eps=Eps,Kcoupling=Kcoupling,Kmain=Kmain,Kvol=KVOL,ParticleType = ParticleType)
 MC=MonteCarlo(NumberOfParticle,SimNum)
 for n in range(NumberOfParticle):
     Syst.AddRandParticle()
