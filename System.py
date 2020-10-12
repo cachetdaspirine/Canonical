@@ -59,7 +59,6 @@ class System:
                 State=None,
                 ParticleType='Triangle'):
         # Elastic constant
-        self.ParticleType = ParticleType
         self.J=J
         self.Eps=Eps
         self.Kmain=Kmain
@@ -69,6 +68,7 @@ class System:
         self.ObjectClusters=list() # list of object cluster linked witht he c++ program
         self.OccupiedSite=set()
         self.FreeSite=set()
+        self.ParticleType = ParticleType
         # Two ways of initializing the system
         if type(State)==np.ndarray:
             if ParticleType == 'Triangle':
@@ -83,6 +83,12 @@ class System:
             self.Build_From_System(Old_System) # Copy a system
         # Plus the possibility to start with an empty system
         else:
+            if ParticleType == 'Triangle':
+                self.TopologieUp = TopologieUpTriangle
+                self.TopologieDown = TopologieDownTriangle
+            elif ParticleType == 'Hexagon':
+                self.TopologieUp = TopologieUpHex
+                self.TopologieDown = TopologieDownHex
             self.Lx=Lx
             self.Ly=Ly
             #State of 0 and 1

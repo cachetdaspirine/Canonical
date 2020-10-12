@@ -40,6 +40,7 @@ def CoolDown(time,DE0):
 #  \___/   \___/    |_|   |_|      \___/    |_|
 
 with open('Res/Sim'+str(SimNum)+'/Parameter.out','w') as myfile:
+    myfile.write('ParticleType '+ParticleType)
     myfile.write('TimeStepTot '+str(TimeStepTot)+'\n')
     myfile.write('StatTime '+str(StatTime)+'\n')
     myfile.write('BetaInitial '+str(BetaInitial)+'\n')
