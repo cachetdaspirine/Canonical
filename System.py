@@ -255,7 +255,8 @@ class System:
                                     Kcoupling=self.Kcoupling,
                                     Kvol=self.Kvol,
                                     Xg=self.BinaryClusters[-1].Xg,
-                                    Yg=self.BinaryClusters[-1].Yg))
+                                    Yg=self.BinaryClusters[-1].Yg,
+                                    ParticleType=self.ParticleType))
         return RandomSite
     def RemoveRandParticle(self):
         # Try to remove a particle
@@ -290,7 +291,8 @@ class System:
                                         Kcoupling=self.Kcoupling,
                                         Kvol=self.Kvol,
                                         Xg=self.BinaryClusters[-k].Xg,
-                                        Yg=self.BinaryClusters[-k].Yg))
+                                        Yg=self.BinaryClusters[-k].Yg,
+                                        ParticleType = self.ParticleType))
         return RandomParticle
     def GetAffectedCluster(self,SiteConcerned):
         # Must return a set (to avoid doublet) of cluster indices
@@ -307,6 +309,7 @@ class System:
             objcluster.PlotPerSite(show=False,zoom=zoom,ax=ax)
         ax.set_xlim([0,self.Lx+3])
         ax.set_ylim([0,self.Ly+3])
+        ax.set_aspect(aspect=1.)
         plt.show()
     def PrintPerSite(self,FileName='Noname.txt',Path=''):
         XY=[]
