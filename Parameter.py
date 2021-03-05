@@ -5,16 +5,17 @@
 # |____/   \__, | |___/  \__|  \___| |_| |_| |_|
 #          |___/
 ParticleType = 'Triangle'
+Output=True
 Kmain=1.
-Kcoupling=21
+Kcoupling=0.04629
 Eps=0.01
-KVOL=0.
+KVOL=0.288675
 #----------------
-J=0.0003
+J=2.774*10**(-5)
 #----------------
 SizeX=35
 SizeY=35
-NumberOfParticle=150
+NumberOfParticle=300
 
 #  ____                                              _
 # |  _ \    __ _   _ __    __ _   _ __ ___     ___  | |_    ___   _ __   ___
