@@ -252,6 +252,13 @@ class Cluster:
             print("can t output an empty system")
             return 0.
         self.lib.OutputSystemSite(self.Adress,Name.encode('utf-8'))
+    def PrintSpringPerSite(self,Name='NoName.txt'):
+        # output the spring per site(easier if you wanna plot the springs).
+        if self.Np < 1:
+            print("can t output an empty system")
+            return 0.
+        if self.ParticleType=='Hexagon':
+            self.lib.OutputSpringPerSite(self.Adress, Name.encode('utf-8'))
     def PrintPerSpring(self,Name='NoName.txt'):
         # output the system per spring (easier if you wanna plot the springs).
         if self.Np<1:
