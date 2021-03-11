@@ -102,11 +102,19 @@ for t in range(1,TimeStepTot):
                 myfile.write(str(t)+" "+str(Syst.ElasticEnergy/Syst.g_Np())+" "+str(Syst.SurfaceEnergy/Syst.g_Np())+" "+str((Syst.ElasticEnergy+Syst.SurfaceEnergy)/Syst.g_Np())+"\n")
             if Output:
                 Syst.PrintPerSite('Res/Sim'+str(SimNum)+'/Site_time'+str(t)+'.res')#,Path='Res/Sim'+str(SimNum)+'/')
+<<<<<<< HEAD
                 #Syst.PrintSpringPerSite('Res/Sim'+str(SimNum)+'/SprinSite_time'+str(t)+'.res')#,Path='Res/Sim'+str(SimNum)+'/')
             #Syst.PrintPerSpring('Res/Sim'+str(SimNum)+'/Spring_time'+str(t)+'.res')
 #Syst.PlotPerSite()
 Syst.PrintPerSite('Res/Sim'+str(SimNum)+'/Site_Final.res')
 #Syst.PrintPerSite('Res/Sim'+str(SimNum)+'/SpringSite_Final.res')
+=======
+                Syst.PrintSpringPerSite('Res/Sim'+str(SimNum)+'/SprinSite_time'+str(t)+'.res')#,Path='Res/Sim'+str(SimNum)+'/')
+            #Syst.PrintPerSpring('Res/Sim'+str(SimNum)+'/Spring_time'+str(t)+'.res')
+#Syst.PlotPerSite()
+Syst.PrintPerSite('Res/Sim'+str(SimNum)+'/Site_Final.res')
+Syst.PrintPerSite('Res/Sim'+str(SimNum)+'/SpringSite_Final.res')
+>>>>>>> dbf88978272bfbf263e10dde3dd5cb7cfa2ec8ff
 #Syst.PrintPerSpring('Res/Sim'+str(SimNum)+'/Spring_Final.res')
 #Syst.PlotPerSite()
 
