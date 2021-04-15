@@ -13,6 +13,7 @@ if len(sys.argv)<2:
 
 time_start = time.perf_counter()
 SimNum=sys.argv[1]
+#os.system('rm -rf Res/Sim'+str(SimNum))
 sys.path.insert(0,'Res/Sim'+str(SimNum))
 from Parameter import *
 #os.system('rm -rf Res/Sim'+str(SimNum))
@@ -63,7 +64,7 @@ with open('Res/Sim'+str(SimNum)+'/Parameter.out','w') as myfile:
 rd.seed(Seed)
 np.random.seed(Seed)
 Beta=BetaInitial
-Syst=System(SizeX,SizeY,J=J,Eps=Eps,Kcoupling=Kcoupling,Kmain=Kmain,Kvol=KVOL,ParticleType = ParticleType)
+Syst=System(SizeX,SizeY,J=J,Eps=Eps,Kcoupling=Kcoupling,Kmain=Kmain,Kvol=KVOL,ParticleType = ParticleType,Expansion = Expansion)
 MC=MonteCarlo(NumberOfParticle,SimNum)
 for n in range(NumberOfParticle):
     Syst.AddRandParticle()

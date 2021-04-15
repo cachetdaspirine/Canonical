@@ -57,8 +57,10 @@ class System:
                 J=1.,
                 Old_System=None,
                 State=None,
-                ParticleType='Triangle'):
+                ParticleType='Triangle',
+                Expansion = False):
         # Elastic constant
+        self.Expansion = Expansion
         self.J=J
         self.Eps=Eps
         self.Kmain=Kmain
@@ -98,6 +100,7 @@ class System:
             self.Compute_Energy()
     def Build_From_System(self,Old):
         #From another System : we copy everything
+        self.Expansion = Old.Expansion
         self.ParticleType = Old.ParticleType
         self.TopologieUp = Old.TopologieUp
         self.TopologieDown = Old.TopologieDown
@@ -175,7 +178,8 @@ class System:
                                         Kvol=self.Kvol,
                                         Xg=BinClust.Xg,
                                         Yg=BinClust.Yg,
-                                        ParticleType=self.ParticleType))
+                                        ParticleType=self.ParticleType,
+                                        Expansion = self.Expansion))
     def MakeBinaryClusters(self,SitesNoCluster):
         # Given an array of 0/1 called self.State this function split all the
         # 1 that respect a neighboring relation (given by the function Neighbors)
@@ -256,7 +260,8 @@ class System:
                                     Kvol=self.Kvol,
                                     Xg=self.BinaryClusters[-1].Xg,
                                     Yg=self.BinaryClusters[-1].Yg,
-                                    ParticleType=self.ParticleType))
+                                    ParticleType=self.ParticleType,
+                                    Expansion = self.Expansion))
         return RandomSite
     def RemoveRandParticle(self):
         # Try to remove a particle
@@ -292,7 +297,8 @@ class System:
                                         Kvol=self.Kvol,
                                         Xg=self.BinaryClusters[-k].Xg,
                                         Yg=self.BinaryClusters[-k].Yg,
-                                        ParticleType = self.ParticleType))
+                                        ParticleType = self.ParticleType,
+                                        Expansion = self.Expansion))
         return RandomParticle
     def GetAffectedCluster(self,SiteConcerned):
         # Must return a set (to avoid doublet) of cluster indices
