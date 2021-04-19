@@ -224,6 +224,8 @@ class Cluster:
         self.ParticleType = old_cluster.ParticleType
         self.Expansion = old_cluster.Expansion
         if self.Expansion :
+            self.Mc = old_cluster.Mc
+            self.q0 = old_cluster.q0
             self.lib = libRand
         elif self.ParticleType=='Triangle':
             self.lib=libTriangle

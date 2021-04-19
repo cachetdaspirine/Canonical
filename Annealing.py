@@ -99,8 +99,9 @@ for t in range(1,TimeStepTot):
         print("time=",t)
         MC.MakeStat(t,Beta)
         if Syst.g_Np()!=0:
+            Etot = Syst.Compute_Energy()
             with open('Res/Sim'+str(SimNum)+'/Energy.out','a') as myfile:
-                myfile.write(str(t)+" "+str(Syst.ElasticEnergy/Syst.g_Np())+" "+str(Syst.SurfaceEnergy/Syst.g_Np())+" "+str((Syst.ElasticEnergy+Syst.SurfaceEnergy)/Syst.g_Np())+"\n")
+                myfile.write(str(t)+" "+str(Syst.ElasticEnergy/Syst.g_Np())+" "+str(Syst.SurfaceEnergy/Syst.g_Np())+" "+str(Etot/Syst.g_Np())+"\n")
             if Output:
                 Syst.PrintPerSite('Res/Sim'+str(SimNum)+'/Site_time'+str(t)+'.res',Path='Res/Sim'+str(SimNum)+'/')
                 #Syst.PrintSpringPerSite('Res/Sim'+str(SimNum)+'/SprinSite_time'+str(t)+'.res')#,Path='Res/Sim'+str(SimNum)+'/')
