@@ -1,6 +1,14 @@
 import Conversion as Conv
 
-P = Conv.AnalyticToSimul(Gamma = 0.5, nu = 0.33, l = 5., epsilon= 0.01,writting= False,ParticleType='Hexagon')
+SimNum = 
+
+numin = 0.4
+numax = 0.9
+MaxSim = 10.
+
+nu = numin + SimNum*(numax-numin)/MaxSim
+
+P = Conv.AnalyticToSimul(Gamma = 0.5, nu = nu, l = 5., epsilon= 0.01,writting= False,ParticleType='Hexagon')
 #  ____                  _
 # / ___|   _   _   ___  | |_    ___   _ __ ___
 # \___ \  | | | | / __| | __|  / _ \ | '_ ` _ \
@@ -17,7 +25,7 @@ J=P.J#2.774*10**(-5)
 #----------------
 SizeX=35
 SizeY=35
-NumberOfParticle=300
+NumberOfParticle=400
 Expansion = True
 Output=True
 #  ____                                              _
@@ -26,8 +34,8 @@ Output=True
 # |  __/  | (_| | | |    | (_| | | | | | | | |  __/ | |_  |  __/ | |    \__ \
 # |_|      \__,_| |_|     \__,_| |_| |_| |_|  \___|  \__|  \___| |_|    |___/
 
-TimeStepTot=100
-StatTime=10#TimeStepTot//100
+TimeStepTot=1000000
+StatTime=TimeStepTot//100
 BetaInitial=0
 BetaFinal=1.6*10**2
 Seed=None
