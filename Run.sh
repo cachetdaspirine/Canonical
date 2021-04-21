@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for SimNum in {0..10}
+for SimNum in {0..5}
 do
 	rm -rf "Res/Sim$SimNum"
 	mkdir "Res/Sim$SimNum"

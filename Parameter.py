@@ -4,7 +4,7 @@ SimNum = 1
 
 numin = 0.4
 numax = 0.9
-MaxSim = 10.
+MaxSim = 5.
 
 nu = numin + SimNum*(numax-numin)/MaxSim
 
@@ -25,7 +25,11 @@ J=P.J#2.774*10**(-5)
 #----------------
 SizeX=35
 SizeY=35
+<<<<<<< HEAD
 NumberOfParticle=100
+=======
+NumberOfParticle=300
+>>>>>>> daf6d0a2156fb9ed1817149e5fea07fbf208c177
 Expansion = True
 Output=True
 #  ____                                              _
@@ -34,8 +38,13 @@ Output=True
 # |  __/  | (_| | | |    | (_| | | | | | | | |  __/ | |_  |  __/ | |    \__ \
 # |_|      \__,_| |_|     \__,_| |_| |_| |_|  \___|  \__|  \___| |_|    |___/
 
+<<<<<<< HEAD
 TimeStepTot=1000
 StatTime=100#TimeStepTot//100
+=======
+TimeStepTot=500000
+StatTime=TimeStepTot//100
+>>>>>>> daf6d0a2156fb9ed1817149e5fea07fbf208c177
 BetaInitial=0
 BetaFinal=1.6*10**2
 Seed=None
