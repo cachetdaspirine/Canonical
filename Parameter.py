@@ -1,6 +1,6 @@
 import Conversion as Conv
 
-SimNum = 
+SimNum = 1
 
 numin = 0.4
 numax = 0.9
@@ -25,7 +25,7 @@ J=P.J#2.774*10**(-5)
 #----------------
 SizeX=35
 SizeY=35
-NumberOfParticle=400
+NumberOfParticle=100
 Expansion = True
 Output=True
 #  ____                                              _
@@ -34,8 +34,8 @@ Output=True
 # |  __/  | (_| | | |    | (_| | | | | | | | |  __/ | |_  |  __/ | |    \__ \
 # |_|      \__,_| |_|     \__,_| |_| |_| |_|  \___|  \__|  \___| |_|    |___/
 
-TimeStepTot=1000000
-StatTime=TimeStepTot//100
+TimeStepTot=1000
+StatTime=100#TimeStepTot//100
 BetaInitial=0
 BetaFinal=1.6*10**2
 Seed=None

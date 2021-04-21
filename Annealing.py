@@ -20,6 +20,8 @@ from Parameter import *
 #os.system('mkdir Res/Sim'+str(SimNum))
 with open('Res/Sim'+str(SimNum)+'/Energy.out','w') as myfile:
     myfile.write('time ElasticEnergy SurfaceEnergy TotalEnergy \n')
+with open('Res/Sim'+str(SimNum)+'/ClusterStat.out','w') as myfile:
+    myfile.write('time MeanClusterSize \n')
 
 
 
@@ -102,6 +104,8 @@ for t in range(1,TimeStepTot):
             Etot = Syst.Compute_Energy()
             with open('Res/Sim'+str(SimNum)+'/Energy.out','a') as myfile:
                 myfile.write(str(t)+" "+str(Syst.ElasticEnergy/Syst.g_Np())+" "+str(Syst.SurfaceEnergy/Syst.g_Np())+" "+str(Etot/Syst.g_Np())+"\n")
+            with open('Res/Sim'+str(SimNum)+'/ClusterStat.out','a') as myfile:
+                myfile.write(str(t)+" "+str(np.mean([C.Np for C in Syst.ObjectClusters]))+"\n")
             if Output:
                 Syst.PrintPerSite('Res/Sim'+str(SimNum)+'/Site_time'+str(t)+'.res',Path='Res/Sim'+str(SimNum)+'/')
                 #Syst.PrintSpringPerSite('Res/Sim'+str(SimNum)+'/SprinSite_time'+str(t)+'.res')#,Path='Res/Sim'+str(SimNum)+'/')
