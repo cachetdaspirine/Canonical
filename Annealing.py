@@ -112,6 +112,7 @@ for t in range(1,TimeStepTot):
             #Syst.PrintPerSpring('Res/Sim'+str(SimNum)+'/Spring_time'+str(t)+'.res')
 #Syst.PlotPerSite()
 Syst.PrintPerSite('Res/Sim'+str(SimNum)+'/Site_Final.res')
+np.save('Res/Sim'+str(SimNum)+'/State_Finale',Syst.State,allow_pickle=True)
 #Syst.PrintPerSite('Res/Sim'+str(SimNum)+'/SpringSite_Final.res')
 #Syst.PrintPerSpring('Res/Sim'+str(SimNum)+'/Spring_Final.res')
 #Syst.PlotPerSite()
