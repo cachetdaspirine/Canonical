@@ -6,6 +6,8 @@ from McMove import *
 import time
 import os
 import sys
+import numpy as np
+from collections import deque
 
 if len(sys.argv)<2:
     print('Number of the serie not specified, please enter a serie name')
@@ -24,13 +26,19 @@ with open('Res/Sim'+str(SimNum)+'/ClusterStat.out','w') as myfile:
     myfile.write('time MeanClusterSize \n')
 
 
-
-def CoolDown(time,DE0):
-    #print(DE0)
-    if DE0!=0:
-        return -6/(7*DE0)*np.log(1-time/TimeStepTot)+1/(7*DE0)
-    else :
-        return BetaInitial
+class BETA:
+    def __init__(self,BetaInitial):
+        self.BetaInitial = BetaInitial
+        self.DE = deque([])
+    def CoolDown(self,time,DE0):
+        self.DE.appendleft(DE0)
+        if self.DE.__len__()==10:
+            self.DE.pop()
+        ADE = np.mean(self.DE)
+        if ADE!=0:
+            return -6/(7*ADE)*np.log(1-time/TimeStepTot)+1/(7*ADE)
+        else :
+            return self.BetaInitial
     #return BetaInitial+time/TimeStepTot*(BetaFinal-BetaInitial)
 
 
@@ -68,6 +76,7 @@ np.random.seed(Seed)
 Beta=BetaInitial
 Syst=System(SizeX,SizeY,J=J,Eps=Eps,Kcoupling=Kcoupling,Kmain=Kmain,Kvol=KVOL,ParticleType = ParticleType,Expansion = Expansion)
 MC=MonteCarlo(NumberOfParticle,SimNum)
+B = BETA(BetaInitial)
 for n in range(NumberOfParticle):
     Syst.AddRandParticle()
 
@@ -95,7 +104,7 @@ for t in range(1,TimeStepTot):
     MC.Count(Success,Eaft-Ei)
     #------Cool down the system ----------------------
     if t>StatTime:
-        Beta=CoolDown(t,MC.avDE/5.)
+        Beta=B.CoolDown(t,MC.avDE/(7.*MC.Nmove))
     #------Make the stats and adapt the McMove--------
     if t%StatTime==0 and t!=0 :
         print("time=",t)

@@ -64,9 +64,9 @@ class MonteCarlo:
         with open('Res/Sim'+str(self.SimNum)+'/AdvanceStat.out','a') as myfile:
             myfile.write(str(time)+' '+str(Beta)+' '+str(DEPrate)+' '+str(DENrate)+' '+str(self.DEPArate))
             myfile.write(' '+str(self.avDE)+'\n')
-        if AcceptanceRate > 0.6:
+        if AcceptanceRate > 0.8:
             self.Harder()
-        elif AcceptanceRate < 0.4 :
+        elif AcceptanceRate < 0.35 :
             self.Softer()
         self.DE,self.DEN,self.DEP,self.DEPA=0,0,0,0
         self.Success=0
